@@ -1,3 +1,12 @@
+<!-- <div class="card flex justify-content-center">
+  <h2>Seleccione el archivo de AFIP </h2>
+  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUploadAFIP($event)"></p-fileUpload>
+</div>
 <div class="card flex justify-content-center">
-  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" (onUpload)="onUpload($event)"></p-fileUpload>
+  <h2>Seleccione el archivo de su sistema</h2>
+  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)"></p-fileUpload>
+</div> -->
+<div class="card flex justify-content-center">
+  <h2>Seleccione los dos archivos</h2>
+  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUploadAFIP($event)" [multiple]="true"></p-fileUpload>
 </div>

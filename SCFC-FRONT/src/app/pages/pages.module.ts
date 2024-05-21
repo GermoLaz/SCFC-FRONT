@@ -5,13 +5,14 @@ import { CommonModule } from "@angular/common";
 import { SharedModule } from "../shared/shared.module";
 import { FormsModule } from "@angular/forms";
 import { FilesUploadComponent } from "../components/files-Upload/files-upload.component";
-
+import { DifferenceTableComponent } from "../components/differences-table/differences-table.component";
 
 @NgModule({
   declarations: [
     LoginComponent,
     MainPageComponent,
-    FilesUploadComponent
+    FilesUploadComponent,
+    DifferenceTableComponent
   ],
   imports: [
     CommonModule,
