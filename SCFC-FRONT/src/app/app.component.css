@@ -1,0 +1,21 @@
+.centrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-group label {
+  text-align: left;
+}
+
+.form-group input {
+  text-align: right;
+}
