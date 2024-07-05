@@ -1,37 +1,262 @@
-<p-table [value]="differencesFromFile1">
+<p-table [value]="tableArray">
   <ng-template pTemplate="header">
     <tr>
-      <th>CAE</th>
+      <th>ID</th>
       <th>Fecha</th>
-      <th>Archivo Fuente</th>
-      <th>Diferencias</th>
+      <th>Tipo Comp</th>
+      <th>Pto Venta</th>
+      <th>Num Comp</th>
+      <th>Despacho Import</th>
+      <th>Cod Doc Vendedor</th>
+      <th>Doc Vendedor</th>
+      <th>Nombre Vendedor</th>
+      <th>Importe Total</th>
+      <th>Total No Grav</th>
+      <th>Total Exento</th>
+      <th>Perc Valor Agregado</th>
+      <th>Perc Otros Imp Nac</th>
+      <th>Perc IIBB</th>
+      <th>Perc Muni</th>
+      <th>Total Imp Internos</th>
+      <th>Cod Moneda</th>
+      <th>Tipo Cambio</th>
+      <th>Cant Alicuotas</th>
+      <th>Cod Operacion</th>
+      <th>Credito Fisc Computable</th>
+      <th>Otros Tributos</th>
+      <th>Source File</th>
+      <th>Error Description</th>
+      <th>CUIT Emisor</th>
+      <th>Denom Emisor</th>
+      <th>IVA Comision</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-difference>
+  <ng-template pTemplate="body" let-item>
     <tr>
-      <td>{{difference.cae}}</td>
-      <td>{{difference.date}}</td>
-      <td>{{difference.sourceFile}}</td>
-      <td>{{difference.differences | json}}</td>
-    </tr>
-  </ng-template>
-</p-table>
-
-<p-table [value]="differencesFromFile2">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>CAE</th>
-      <th>Fecha</th>
-      <th>Archivo Fuente</th>
-      <th>Diferencias</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-difference>
-    <tr>
-      <td>{{difference.cae}}</td>
-      <td>{{difference.date}}</td>
-      <td>{{difference.sourceFile}}</td>
-      <td>{{difference.differences | json}}</td>
+      <td>
+        <ng-container *ngIf="isObject(item.id); else simpleId">
+          <select [(ngModel)]="item.id.selectedOption">
+            <option *ngFor="let option of item.id.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleId>{{item.id}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.fecha); else simpleFecha">
+          <select [(ngModel)]="item.fecha.selectedOption">
+            <option *ngFor="let option of item.fecha.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleFecha>{{item.fecha}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.tipoComp); else simpleTipoComp">
+          <select [(ngModel)]="item.tipoComp.selectedOption">
+            <option *ngFor="let option of item.tipoComp.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleTipoComp>{{item.tipoComp}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.ptoVenta); else simplePtoVenta">
+          <select [(ngModel)]="item.ptoVenta.selectedOption">
+            <option *ngFor="let option of item.ptoVenta.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simplePtoVenta>{{item.ptoVenta}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.numComp); else simpleNumComp">
+          <select [(ngModel)]="item.numComp.selectedOption">
+            <option *ngFor="let option of item.numComp.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleNumComp>{{item.numComp}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.despachoImport); else simpleDespachoImport">
+          <select [(ngModel)]="item.despachoImport.selectedOption">
+            <option *ngFor="let option of item.despachoImport.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleDespachoImport>{{item.despachoImport}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.codDocVendedor); else simpleCodDocVendedor">
+          <select [(ngModel)]="item.codDocVendedor.selectedOption">
+            <option *ngFor="let option of item.codDocVendedor.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCodDocVendedor>{{item.codDocVendedor}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.docVendedor); else simpleDocVendedor">
+          <select [(ngModel)]="item.docVendedor.selectedOption">
+            <option *ngFor="let option of item.docVendedor.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleDocVendedor>{{item.docVendedor}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.nombreVendedor); else simpleNombreVendedor">
+          <select [(ngModel)]="item.nombreVendedor.selectedOption">
+            <option *ngFor="let option of item.nombreVendedor.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleNombreVendedor>{{item.nombreVendedor}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.importeTotal); else simpleImporteTotal">
+          <select [(ngModel)]="item.importeTotal.selectedOption">
+            <option *ngFor="let option of item.importeTotal.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleImporteTotal>{{item.importeTotal}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.totalNoGrav); else simpleTotalNoGrav">
+          <select [(ngModel)]="item.totalNoGrav.selectedOption">
+            <option *ngFor="let option of item.totalNoGrav.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleTotalNoGrav>{{item.totalNoGrav}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.totalExento); else simpleTotalExento">
+          <select [(ngModel)]="item.totalExento.selectedOption">
+            <option *ngFor="let option of item.totalExento.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleTotalExento>{{item.totalExento}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.percValorAgregado); else simplePercValorAgregado">
+          <select [(ngModel)]="item.percValorAgregado.selectedOption">
+            <option *ngFor="let option of item.percValorAgregado.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simplePercValorAgregado>{{item.percValorAgregado}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.percOtrosImpNac); else simplePercOtrosImpNac">
+          <select [(ngModel)]="item.percOtrosImpNac.selectedOption">
+            <option *ngFor="let option of item.percOtrosImpNac.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simplePercOtrosImpNac>{{item.percOtrosImpNac}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.percIIBB); else simplePercIIBB">
+          <select [(ngModel)]="item.percIIBB.selectedOption">
+            <option *ngFor="let option of item.percIIBB.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simplePercIIBB>{{item.percIIBB}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.percMuni); else simplePercMuni">
+          <select [(ngModel)]="item.percMuni.selectedOption">
+            <option *ngFor="let option of item.percMuni.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simplePercMuni>{{item.percMuni}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.totalImpInternos); else simpleTotalImpInternos">
+          <select [(ngModel)]="item.totalImpInternos.selectedOption">
+            <option *ngFor="let option of item.totalImpInternos.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleTotalImpInternos>{{item.totalImpInternos}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.codMoneda); else simpleCodMoneda">
+          <select [(ngModel)]="item.codMoneda.selectedOption">
+            <option *ngFor="let option of item.codMoneda.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCodMoneda>{{item.codMoneda}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.tipoCambio); else simpleTipoCambio">
+          <select [(ngModel)]="item.tipoCambio.selectedOption">
+            <option *ngFor="let option of item.tipoCambio.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleTipoCambio>{{item.tipoCambio}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.cantAlicuotas); else simpleCantAlicuotas">
+          <select [(ngModel)]="item.cantAlicuotas.selectedOption">
+            <option *ngFor="let option of item.cantAlicuotas.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCantAlicuotas>{{item.cantAlicuotas}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.codOperacion); else simpleCodOperacion">
+          <select [(ngModel)]="item.codOperacion.selectedOption">
+            <option *ngFor="let option of item.codOperacion.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCodOperacion>{{item.codOperacion}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.creditoFiscComputable); else simpleCreditoFiscComputable">
+          <select [(ngModel)]="item.creditoFiscComputable.selectedOption">
+            <option *ngFor="let option of item.creditoFiscComputable.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCreditoFiscComputable>{{item.creditoFiscComputable}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.otrosTributos); else simpleOtrosTributos">
+          <select [(ngModel)]="item.otrosTributos.selectedOption">
+            <option *ngFor="let option of item.otrosTributos.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleOtrosTributos>{{item.otrosTributos}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.sourceFile); else simpleSourceFile">
+          <select [(ngModel)]="item.sourceFile.selectedOption">
+            <option *ngFor="let option of item.sourceFile.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleSourceFile>{{item.sourceFile}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.errorDescription); else simpleErrorDescription">
+          <select [(ngModel)]="item.errorDescription.selectedOption">
+            <option *ngFor="let option of item.errorDescription.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleErrorDescription>{{item.errorDescription}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.cuitEmisor); else simpleCuitEmisor">
+          <select [(ngModel)]="item.cuitEmisor.selectedOption">
+            <option *ngFor="let option of item.cuitEmisor.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleCuitEmisor>{{item.cuitEmisor}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.denomEmisor); else simpleDenomEmisor">
+          <select [(ngModel)]="item.denomEmisor.selectedOption">
+            <option *ngFor="let option of item.denomEmisor.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleDenomEmisor>{{item.denomEmisor}}</ng-template>
+      </td>
+      <td>
+        <ng-container *ngIf="isObject(item.ivacomision); else simpleIvaComision">
+          <select [(ngModel)]="item.ivacomision.selectedOption">
+            <option *ngFor="let option of item.ivacomision.options" [ngValue]="option">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleIvaComision>{{item.ivacomision}}</ng-template>
+      </td>
     </tr>
   </ng-template>
 </p-table>

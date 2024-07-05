@@ -3,7 +3,8 @@ import { DifferenceService } from './../../services/difference.service';
 import { FilesUploadService } from './files-upload.service';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Difference } from '../../models/difference.model';
+import { Difference } from '../../models/differences.model';
+import { InvoicesResponse } from '../../models/InvoicesResponse.model';
 
 
 
@@ -18,9 +19,9 @@ export class FilesUploadComponent {
   uploadedFile: any;
 
   constructor(private messageService: MessageService,
-              private filesUploadService: FilesUploadService,
-              private differenceService: DifferenceService,
-              private router: Router) {}
+    private filesUploadService: FilesUploadService,
+    private differenceService: DifferenceService,
+    private router: Router) { }
 
   // onUpload(event: { files: any; }) {
   //   for (let file of event.files) {
@@ -34,7 +35,7 @@ export class FilesUploadComponent {
     this.uploadedFile = event.files[0];
     console.log(this.uploadedFile);
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-}
+  }
   // onUploadAFIP(event: { files: any; }) {
   //   for (let file of event.files) {
   //     this.uploadedFiles.push(file);
@@ -53,14 +54,18 @@ export class FilesUploadComponent {
       return;
     }
 
+
     const file1 = event.files[0];
     const file2 = event.files[1];
 
     // this.filesUploadService.getDifferences(file1, file2);
-    this.filesUploadService.getDifferences(file1, file2).then((differences: { differencesFromFile1: Difference[], differencesFromFile2: Difference[] }) => {
-      this.differenceService.changeDifferences(differences);
-      this.router.navigate(['/difference-table']);
-    });
+    this.filesUploadService.getDifferences(file1, file2).then(
+      (invoiceResponse : InvoicesResponse) => {
+        console.log(invoiceResponse)
+        this.differenceService.changeDifferences(invoiceResponse.differences);
+        // this.router.navigate(['/difference-table']);
+      }
+    );
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
 
