@@ -1,7 +1,7 @@
 <p-table [value]="tableArray">
   <ng-template pTemplate="header">
     <tr>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>Fecha</th>
       <th>Tipo Comp</th>
       <th>Pto Venta</th>
@@ -24,207 +24,207 @@
       <th>Cod Operacion</th>
       <th>Credito Fisc Computable</th>
       <th>Otros Tributos</th>
-      <th>Source File</th>
+      <!-- <th>Source File</th> -->
       <th>Error Description</th>
-      <th>CUIT Emisor</th>
+      <!-- <th>CUIT Emisor</th>
       <th>Denom Emisor</th>
-      <th>IVA Comision</th>
+      <th>IVA Comision</th> -->
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr>
-      <td>
+      <!-- <td>
         <ng-container *ngIf="isObject(item.id); else simpleId">
           <select [(ngModel)]="item.id.selectedOption">
             <option *ngFor="let option of item.id.options" [ngValue]="option">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleId>{{item.id}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <ng-container *ngIf="isObject(item.fecha); else simpleFecha">
-          <select [(ngModel)]="item.fecha.selectedOption">
-            <option *ngFor="let option of item.fecha.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'fecha', $event)">
+            <option *ngFor="let option of item.fecha.options" [value]="option" [selected]="option === item.fecha.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleFecha>{{item.fecha}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.tipoComp); else simpleTipoComp">
-          <select [(ngModel)]="item.tipoComp.selectedOption">
-            <option *ngFor="let option of item.tipoComp.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'tipoComp', $event)">
+            <option *ngFor="let option of item.tipoComp.options" [value]="option" [selected]="option === item.tipoComp.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleTipoComp>{{item.tipoComp}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.ptoVenta); else simplePtoVenta">
-          <select [(ngModel)]="item.ptoVenta.selectedOption">
-            <option *ngFor="let option of item.ptoVenta.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'ptoVenta', $event)">
+            <option *ngFor="let option of item.ptoVenta.options" [value]="option" [selected]="option === item.ptoVenta.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simplePtoVenta>{{item.ptoVenta}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.numComp); else simpleNumComp">
-          <select [(ngModel)]="item.numComp.selectedOption">
-            <option *ngFor="let option of item.numComp.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'numComp', $event)">
+            <option *ngFor="let option of item.numComp.options" [value]="option" [selected]="option === item.numComp.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleNumComp>{{item.numComp}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.despachoImport); else simpleDespachoImport">
-          <select [(ngModel)]="item.despachoImport.selectedOption">
-            <option *ngFor="let option of item.despachoImport.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'despachoImport', $event)">
+            <option *ngFor="let option of item.despachoImport.options" [value]="option" [selected]="option === item.despachoImport.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleDespachoImport>{{item.despachoImport}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.codDocVendedor); else simpleCodDocVendedor">
-          <select [(ngModel)]="item.codDocVendedor.selectedOption">
-            <option *ngFor="let option of item.codDocVendedor.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'codDocVendedor', $event)">
+            <option *ngFor="let option of item.codDocVendedor.options" [value]="option" [selected]="option === item.codDocVendedor.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleCodDocVendedor>{{item.codDocVendedor}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.docVendedor); else simpleDocVendedor">
-          <select [(ngModel)]="item.docVendedor.selectedOption">
-            <option *ngFor="let option of item.docVendedor.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'docVendedor', $event)">
+            <option *ngFor="let option of item.docVendedor.options" [value]="option" [selected]="option === item.docVendedor.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleDocVendedor>{{item.docVendedor}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.nombreVendedor); else simpleNombreVendedor">
-          <select [(ngModel)]="item.nombreVendedor.selectedOption">
-            <option *ngFor="let option of item.nombreVendedor.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'nombreVendedor', $event)">
+            <option *ngFor="let option of item.nombreVendedor.options" [value]="option" [selected]="option === item.nombreVendedor.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleNombreVendedor>{{item.nombreVendedor}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.importeTotal); else simpleImporteTotal">
-          <select [(ngModel)]="item.importeTotal.selectedOption">
-            <option *ngFor="let option of item.importeTotal.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'importeTotal', $event)">
+            <option *ngFor="let option of item.importeTotal.options" [value]="option" [selected]="option === item.importeTotal.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleImporteTotal>{{item.importeTotal}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.totalNoGrav); else simpleTotalNoGrav">
-          <select [(ngModel)]="item.totalNoGrav.selectedOption">
-            <option *ngFor="let option of item.totalNoGrav.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'totalNoGrav', $event)">
+            <option *ngFor="let option of item.totalNoGrav.options" [value]="option" [selected]="option === item.totalNoGrav.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleTotalNoGrav>{{item.totalNoGrav}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.totalExento); else simpleTotalExento">
-          <select [(ngModel)]="item.totalExento.selectedOption">
-            <option *ngFor="let option of item.totalExento.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'totalExento', $event)">
+            <option *ngFor="let option of item.totalExento.options" [value]="option" [selected]="option === item.totalExento.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleTotalExento>{{item.totalExento}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.percValorAgregado); else simplePercValorAgregado">
-          <select [(ngModel)]="item.percValorAgregado.selectedOption">
-            <option *ngFor="let option of item.percValorAgregado.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'percValorAgregado', $event)">
+            <option *ngFor="let option of item.percValorAgregado.options" [value]="option" [selected]="option === item.percValorAgregado.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simplePercValorAgregado>{{item.percValorAgregado}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.percOtrosImpNac); else simplePercOtrosImpNac">
-          <select [(ngModel)]="item.percOtrosImpNac.selectedOption">
-            <option *ngFor="let option of item.percOtrosImpNac.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'percOtrosImpNac', $event)">
+            <option *ngFor="let option of item.percOtrosImpNac.options" [value]="option" [selected]="option === item.percOtrosImpNac.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simplePercOtrosImpNac>{{item.percOtrosImpNac}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.percIIBB); else simplePercIIBB">
-          <select [(ngModel)]="item.percIIBB.selectedOption">
-            <option *ngFor="let option of item.percIIBB.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'percIIBB', $event)">
+            <option *ngFor="let option of item.percIIBB.options" [value]="option" [selected]="option === item.percIIBB.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simplePercIIBB>{{item.percIIBB}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.percMuni); else simplePercMuni">
-          <select [(ngModel)]="item.percMuni.selectedOption">
-            <option *ngFor="let option of item.percMuni.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'percMuni', $event)">
+            <option *ngFor="let option of item.percMuni.options" [value]="option" [selected]="option === item.percMuni.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simplePercMuni>{{item.percMuni}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.totalImpInternos); else simpleTotalImpInternos">
-          <select [(ngModel)]="item.totalImpInternos.selectedOption">
-            <option *ngFor="let option of item.totalImpInternos.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'totalImpInternos', $event)">
+            <option *ngFor="let option of item.totalImpInternos.options" [value]="option" [selected]="option === item.totalImpInternos.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleTotalImpInternos>{{item.totalImpInternos}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.codMoneda); else simpleCodMoneda">
-          <select [(ngModel)]="item.codMoneda.selectedOption">
-            <option *ngFor="let option of item.codMoneda.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'codMoneda', $event)">
+            <option *ngFor="let option of item.codMoneda.options" [value]="option" [selected]="option === item.codMoneda.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleCodMoneda>{{item.codMoneda}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.tipoCambio); else simpleTipoCambio">
-          <select [(ngModel)]="item.tipoCambio.selectedOption">
-            <option *ngFor="let option of item.tipoCambio.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'tipoCambio', $event)">
+            <option *ngFor="let option of item.tipoCambio.options" [value]="option" [selected]="option === item.tipoCambio.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleTipoCambio>{{item.tipoCambio}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.cantAlicuotas); else simpleCantAlicuotas">
-          <select [(ngModel)]="item.cantAlicuotas.selectedOption">
-            <option *ngFor="let option of item.cantAlicuotas.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'cantAlicuotas', $event)">
+            <option *ngFor="let option of item.cantAlicuotas.options" [value]="option" [selected]="option === item.cantAlicuotas.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleCantAlicuotas>{{item.cantAlicuotas}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.codOperacion); else simpleCodOperacion">
-          <select [(ngModel)]="item.codOperacion.selectedOption">
-            <option *ngFor="let option of item.codOperacion.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'codOperacion', $event)">
+            <option *ngFor="let option of item.codOperacion.options" [value]="option" [selected]="option === item.codOperacion.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleCodOperacion>{{item.codOperacion}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.creditoFiscComputable); else simpleCreditoFiscComputable">
-          <select [(ngModel)]="item.creditoFiscComputable.selectedOption">
-            <option *ngFor="let option of item.creditoFiscComputable.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'creditoFiscComputable', $event)">
+            <option *ngFor="let option of item.creditoFiscComputable.options" [value]="option" [selected]="option === item.creditoFiscComputable.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleCreditoFiscComputable>{{item.creditoFiscComputable}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.otrosTributos); else simpleOtrosTributos">
-          <select [(ngModel)]="item.otrosTributos.selectedOption">
-            <option *ngFor="let option of item.otrosTributos.options" [ngValue]="option">{{option}}</option>
+          <select (change)="onSelectChange(item, 'otrosTributos', $event)">
+            <option *ngFor="let option of item.otrosTributos.options" [value]="option" [selected]="option === item.otrosTributos.selectedOption">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleOtrosTributos>{{item.otrosTributos}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <ng-container *ngIf="isObject(item.sourceFile); else simpleSourceFile">
           <select [(ngModel)]="item.sourceFile.selectedOption">
             <option *ngFor="let option of item.sourceFile.options" [ngValue]="option">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleSourceFile>{{item.sourceFile}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <ng-container *ngIf="isObject(item.errorDescription); else simpleErrorDescription">
           <select [(ngModel)]="item.errorDescription.selectedOption">
@@ -233,7 +233,7 @@
         </ng-container>
         <ng-template #simpleErrorDescription>{{item.errorDescription}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <ng-container *ngIf="isObject(item.cuitEmisor); else simpleCuitEmisor">
           <select [(ngModel)]="item.cuitEmisor.selectedOption">
             <option *ngFor="let option of item.cuitEmisor.options" [ngValue]="option">{{option}}</option>
@@ -248,15 +248,15 @@
           </select>
         </ng-container>
         <ng-template #simpleDenomEmisor>{{item.denomEmisor}}</ng-template>
-      </td>
-      <td>
+      </td> -->
+      <!-- <td>
         <ng-container *ngIf="isObject(item.ivacomision); else simpleIvaComision">
           <select [(ngModel)]="item.ivacomision.selectedOption">
             <option *ngFor="let option of item.ivacomision.options" [ngValue]="option">{{option}}</option>
           </select>
         </ng-container>
         <ng-template #simpleIvaComision>{{item.ivacomision}}</ng-template>
-      </td>
+      </td> -->
     </tr>
   </ng-template>
 </p-table>

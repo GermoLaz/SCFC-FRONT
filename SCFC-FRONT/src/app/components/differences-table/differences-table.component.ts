@@ -51,8 +51,23 @@ export class DifferenceTableComponent implements OnInit {
 
   constructor(private differenceService: DifferenceService) { }
 
-  isObject(value: any): boolean {
+  // isObject(value: any): boolean {
+  //   return typeof value === 'object' && value !== null && 'options' in value && 'selectedOption' in value;
+  // }
+
+  isObject(value: any): value is DifferenceTableItemInfo<any> {
     return typeof value === 'object' && value !== null && 'options' in value && 'selectedOption' in value;
+  }
+
+  onSelectChange(item: DifferenceTableItem, field: keyof DifferenceTableItem, event: Event) {
+    const select = event.target as HTMLSelectElement;
+    const selectedValue = select.value;
+
+    console.log(selectedValue)
+    
+    if (this.isObject(item[field])) {
+      (item[field] as DifferenceTableItemInfo<any>).selectedOption = selectedValue;
+    }
   }
 
   getProperty = <T>(attrA: T, attrB: T): T | DifferenceTableItemInfo<T> =>

@@ -1,6 +1,4 @@
-import { Difference } from '../../models/differences.model';
 import { Injectable } from '@angular/core';
-import { AjaxService } from '../../services/ajax.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { InvoicesResponse } from '../../models/InvoicesResponse.model';
 

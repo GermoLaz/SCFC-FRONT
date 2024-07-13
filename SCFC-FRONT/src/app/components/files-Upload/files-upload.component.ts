@@ -3,7 +3,6 @@ import { DifferenceService } from './../../services/difference.service';
 import { FilesUploadService } from './files-upload.service';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Difference } from '../../models/differences.model';
 import { InvoicesResponse } from '../../models/InvoicesResponse.model';
 
 
@@ -62,7 +61,11 @@ export class FilesUploadComponent {
     this.filesUploadService.getDifferences(file1, file2).then(
       (invoiceResponse : InvoicesResponse) => {
         console.log(invoiceResponse)
+
+        localStorage.setItem('allInvoices', JSON.stringify(invoiceResponse.allInvoices));
+        
         this.differenceService.changeDifferences(invoiceResponse.differences);
+
         // this.router.navigate(['/difference-table']);
       }
     );
