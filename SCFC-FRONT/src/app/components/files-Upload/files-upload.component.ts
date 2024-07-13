@@ -1,11 +1,9 @@
-import { Router } from '@angular/router';
-import { DifferenceService } from './../../services/difference.service';
-import { FilesUploadService } from './files-upload.service';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { FilesUploadService } from './files-upload.service';
+import { DifferenceService } from './../../services/difference.service';
 import { InvoicesResponse } from '../../models/InvoicesResponse.model';
-
-
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-files-upload',
@@ -14,62 +12,71 @@ import { InvoicesResponse } from '../../models/InvoicesResponse.model';
   providers: [MessageService]
 })
 export class FilesUploadComponent {
-  uploadedFiles: any[] = [];
-  uploadedFile: any;
+  @Output() processingComplete = new EventEmitter<boolean>();
+  @ViewChild('fileUploadCSV') fileUploadCSV?: FileUpload;
+  @ViewChild('fileUploadTXT') fileUploadTXT?: FileUpload;
 
-  constructor(private messageService: MessageService,
+  csvFile: any;
+  txtFile: any;
+  loading = false;
+  showErrorDialog = false;
+  errorMessage = '';
+
+  constructor(
+    private messageService: MessageService,
     private filesUploadService: FilesUploadService,
-    private differenceService: DifferenceService,
-    private router: Router) { }
+    private differenceService: DifferenceService
+  ) { }
 
-  // onUpload(event: { files: any; }) {
-  //   for (let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  //   }
-  //   console.log(this.uploadedFiles)
-  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-
-  // }
-  onUpload(event: { files: any; }) {
-    this.uploadedFile = event.files[0];
-    console.log(this.uploadedFile);
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-  }
-  // onUploadAFIP(event: { files: any; }) {
-  //   for (let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  //   }
-  //   console.log(this.uploadedFiles);
-  //   this.filesUploadService.getDifferences(this.uploadedFiles[0], this.uploadedFiles[0]);
-  //   this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-
-  // }
-
-  onUploadAFIP(event: { files: any; }) {
-    if (event.files.length < 2) {
-      console.log('Por favor, cargue dos archivos.');
-      this.messageService.add({ severity: 'info', summary: 'Error', detail: 'Por favor, cargue dos archivos.' });
-
-      return;
+  onSelectFile(event: any, fileType: 'csv' | 'txt') {
+    if (fileType === 'csv') {
+      this.csvFile = event.files[0];
+      this.messageService.add({ severity: 'info', summary: 'Éxito', detail: 'Archivo CSV seleccionado' });
+    } else {
+      this.txtFile = event.files[0];
+      this.messageService.add({ severity: 'info', summary: 'Éxito', detail: 'Archivo TXT seleccionado' });
     }
-
-
-    const file1 = event.files[0];
-    const file2 = event.files[1];
-
-    // this.filesUploadService.getDifferences(file1, file2);
-    this.filesUploadService.getDifferences(file1, file2).then(
-      (invoiceResponse : InvoicesResponse) => {
-        console.log(invoiceResponse)
-
-        localStorage.setItem('allInvoices', JSON.stringify(invoiceResponse.allInvoices));
-        
-        this.differenceService.changeDifferences(invoiceResponse.differences);
-
-        // this.router.navigate(['/difference-table']);
-      }
-    );
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    if (this.csvFile && this.txtFile) {
+      this.processFiles();
+    }
   }
 
+  processFiles() {
+    this.loading = true;
+    this.filesUploadService.getDifferences(this.csvFile, this.txtFile).then(
+      (invoiceResponse: InvoicesResponse) => {
+        console.log(invoiceResponse);
+        localStorage.setItem('allInvoices', JSON.stringify(invoiceResponse.allInvoices));
+        this.differenceService.changeDifferences(invoiceResponse.differences);
+        this.loading = false;
+        this.processingComplete.emit(true);
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Archivos procesados correctamente' });
+      }
+    ).catch(error => {
+      this.loading = false;
+      this.showErrorDialog = true;
+      this.errorMessage = error.message || 'Error desconocido';
+      this.resetFiles();
+    });
+    setTimeout(() => {
+      this.fileUploadCSV?.cd.markForCheck();
+      this.fileUploadTXT?.cd.markForCheck();
+    });
+  }
+
+  closeErrorDialog() {
+    this.showErrorDialog = false;
+    this.resetFiles();
+  }
+
+  resetFiles() {
+    this.csvFile = null;
+    this.txtFile = null;
+    if (this.fileUploadCSV) {
+      this.fileUploadCSV.clear();
+    }
+    if (this.fileUploadTXT) {
+      this.fileUploadTXT.clear();
+    }
+  }
 }

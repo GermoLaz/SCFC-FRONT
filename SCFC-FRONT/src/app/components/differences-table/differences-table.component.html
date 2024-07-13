@@ -1,12 +1,11 @@
-<p-table [value]="tableArray">
+<p-table [value]="tableArray" [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}" [frozenColumns]="['column1', 'column2', 'column3']" [scrollable]="true" [scrollHeight]="'400px'" [style]="{'width':'100%'}">
   <ng-template pTemplate="header">
     <tr>
       <!-- <th>ID</th> -->
-      <th>Fecha</th>
+      <th pFrozenColumn>Fecha</th>
+      <th pFrozenColumn>Pto Venta</th>
+      <th pFrozenColumn>Num Comp</th>
       <th>Tipo Comp</th>
-      <th>Pto Venta</th>
-      <th>Num Comp</th>
-      <th>Despacho Import</th>
       <th>Cod Doc Vendedor</th>
       <th>Doc Vendedor</th>
       <th>Nombre Vendedor</th>
@@ -25,14 +24,16 @@
       <th>Credito Fisc Computable</th>
       <th>Otros Tributos</th>
       <!-- <th>Source File</th> -->
-      <th>Error Description</th>
       <!-- <th>CUIT Emisor</th>
       <th>Denom Emisor</th>
       <th>IVA Comision</th> -->
+      <th>Despacho Import</th>
+      <th>Error Description</th>
+      <th pFrozenColumn alignFrozen="right" [style]="{'width': '100px', 'text-align': 'center'}">Marcar</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
-    <tr>
+    <tr [ngClass]="{'selected-row': item.selected}">
       <!-- <td>
         <ng-container *ngIf="isObject(item.id); else simpleId">
           <select [(ngModel)]="item.id.selectedOption">
@@ -41,7 +42,7 @@
         </ng-container>
         <ng-template #simpleId>{{item.id}}</ng-template>
       </td> -->
-      <td>
+      <td pFrozenColumn>
         <ng-container *ngIf="isObject(item.fecha); else simpleFecha">
           <select (change)="onSelectChange(item, 'fecha', $event)">
             <option *ngFor="let option of item.fecha.options" [value]="option" [selected]="option === item.fecha.selectedOption">{{option}}</option>
@@ -49,15 +50,7 @@
         </ng-container>
         <ng-template #simpleFecha>{{item.fecha}}</ng-template>
       </td>
-      <td>
-        <ng-container *ngIf="isObject(item.tipoComp); else simpleTipoComp">
-          <select (change)="onSelectChange(item, 'tipoComp', $event)">
-            <option *ngFor="let option of item.tipoComp.options" [value]="option" [selected]="option === item.tipoComp.selectedOption">{{option}}</option>
-          </select>
-        </ng-container>
-        <ng-template #simpleTipoComp>{{item.tipoComp}}</ng-template>
-      </td>
-      <td>
+      <td pFrozenColumn>
         <ng-container *ngIf="isObject(item.ptoVenta); else simplePtoVenta">
           <select (change)="onSelectChange(item, 'ptoVenta', $event)">
             <option *ngFor="let option of item.ptoVenta.options" [value]="option" [selected]="option === item.ptoVenta.selectedOption">{{option}}</option>
@@ -65,7 +58,7 @@
         </ng-container>
         <ng-template #simplePtoVenta>{{item.ptoVenta}}</ng-template>
       </td>
-      <td>
+      <td pFrozenColumn>
         <ng-container *ngIf="isObject(item.numComp); else simpleNumComp">
           <select (change)="onSelectChange(item, 'numComp', $event)">
             <option *ngFor="let option of item.numComp.options" [value]="option" [selected]="option === item.numComp.selectedOption">{{option}}</option>
@@ -74,12 +67,12 @@
         <ng-template #simpleNumComp>{{item.numComp}}</ng-template>
       </td>
       <td>
-        <ng-container *ngIf="isObject(item.despachoImport); else simpleDespachoImport">
-          <select (change)="onSelectChange(item, 'despachoImport', $event)">
-            <option *ngFor="let option of item.despachoImport.options" [value]="option" [selected]="option === item.despachoImport.selectedOption">{{option}}</option>
+        <ng-container *ngIf="isObject(item.tipoComp); else simpleTipoComp">
+          <select (change)="onSelectChange(item, 'tipoComp', $event)">
+            <option *ngFor="let option of item.tipoComp.options" [value]="option" [selected]="option === item.tipoComp.selectedOption">{{option}}</option>
           </select>
         </ng-container>
-        <ng-template #simpleDespachoImport>{{item.despachoImport}}</ng-template>
+        <ng-template #simpleTipoComp>{{item.tipoComp}}</ng-template>
       </td>
       <td>
         <ng-container *ngIf="isObject(item.codDocVendedor); else simpleCodDocVendedor">
@@ -97,7 +90,7 @@
         </ng-container>
         <ng-template #simpleDocVendedor>{{item.docVendedor}}</ng-template>
       </td>
-      <td>
+      <td [style]="{'width': '100px', 'text-align': 'left'}">
         <ng-container *ngIf="isObject(item.nombreVendedor); else simpleNombreVendedor">
           <select (change)="onSelectChange(item, 'nombreVendedor', $event)">
             <option *ngFor="let option of item.nombreVendedor.options" [value]="option" [selected]="option === item.nombreVendedor.selectedOption">{{option}}</option>
@@ -226,6 +219,14 @@
         <ng-template #simpleSourceFile>{{item.sourceFile}}</ng-template>
       </td> -->
       <td>
+        <ng-container *ngIf="isObject(item.despachoImport); else simpleDespachoImport">
+          <select (change)="onSelectChange(item, 'despachoImport', $event)">
+            <option *ngFor="let option of item.despachoImport.options" [value]="option" [selected]="option === item.despachoImport.selectedOption">{{option}}</option>
+          </select>
+        </ng-container>
+        <ng-template #simpleDespachoImport>{{item.despachoImport}}</ng-template>
+      </td>
+      <td>
         <ng-container *ngIf="isObject(item.errorDescription); else simpleErrorDescription">
           <select [(ngModel)]="item.errorDescription.selectedOption">
             <option *ngFor="let option of item.errorDescription.options" [ngValue]="option">{{option}}</option>
@@ -257,6 +258,11 @@
         </ng-container>
         <ng-template #simpleIvaComision>{{item.ivacomision}}</ng-template>
       </td> -->
+      <!-- <td><p-checkbox [(ngModel)]="item.selected" (onChange)="onRowSelect(item)"></p-checkbox></td> -->
+      <td pFrozenColumn alignFrozen="right" [style]="{'width': '100px', 'text-align': 'center'}">
+        <p-checkbox [(ngModel)]="item.selected" [binary]="true"></p-checkbox>
+      </td>
+      
     </tr>
   </ng-template>
 </p-table>

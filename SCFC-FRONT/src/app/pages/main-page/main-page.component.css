@@ -1,0 +1,11 @@
+.main-container {
+  max-width: 95%;
+  max-height: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.table-container {
+  margin-top: 2rem;
+  overflow-x: auto;
+}

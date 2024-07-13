@@ -13,25 +13,25 @@ export class FilesUploadService {
   private url = 'http://localhost:8080/invoice/compare';
 
   getDifferences(localFile: File, afipFile: File): Promise<InvoicesResponse> {
-    return new Promise( async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const formData: FormData = new FormData();
       formData.append('file', localFile);
       formData.append('file2', afipFile);
-
       try {
         const res = await fetch(this.url, {
           method: 'POST',
           body: formData      
-        })
-
-        const json = await res.json()
-
-        resolve(json)
+        });
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || 'Error al procesar los archivos');
+        }
+        const json = await res.json();
+        resolve(json);
       } catch (error) {
-        console.error(error)
-        reject(error)
+        console.error(error);
+        reject(error);
       }
-      
     });
   }
 }

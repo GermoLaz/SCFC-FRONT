@@ -1,3 +1,59 @@
-:host {
-  display: block;
+:host ::ng-deep .p-datatable {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #e9ecef;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.selected-row,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.selected-row > td {
+  background-color: #e6fff2 !important;
+}
+
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #2196F3;
+  background: #2196F3;
+}
+
+:host ::ng-deep .p-datatable-scrollable-body {
+  overflow-x: auto !important;
+}
+
+:host ::ng-deep .p-datatable-scrollable .p-frozen-column {
+  position: sticky;
+  background-color: #fff;
+}
+
+:host ::ng-deep .p-datatable-scrollable .p-frozen-column:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #e9ecef;
+}
+
+:host ::ng-deep .p-checkbox {
+  display: flex;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: right;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child {
+  text-align: center;
 }

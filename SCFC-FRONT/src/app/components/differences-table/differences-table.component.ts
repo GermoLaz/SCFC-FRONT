@@ -131,6 +131,4 @@ export class DifferenceTableComponent implements OnInit {
     });
   }
 
-
-
 }

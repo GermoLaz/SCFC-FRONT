@@ -1,13 +1,8 @@
-<!-- <h1>Pagina principal</h1> -->
-<div class="card flex justify-content-center">
-  <!-- <h2>Seleccione el primer archivo</h2> -->
-  <app-files-upload></app-files-upload>
+<div class="main-container">
+  <p-panel header="Carga de archivos" [toggleable]="true" [collapsed]="showTable">
+    <app-files-upload (processingComplete)="onProcessingComplete($event)"></app-files-upload>
+  </p-panel>
+  <div class="table-container" *ngIf="showTable">
+    <app-differences-table></app-differences-table>
+  </div>
 </div>
-<div class="card flex justify-content-center">
-  <!-- <h2>Seleccione el primer archivo</h2> -->
-  <app-differences-table></app-differences-table>
-</div>
-<!-- <div class="card flex justify-content-center">
-  <h2>Seleccione el segundo archivo</h2>
-  <app-files-upload></app-files-upload>
-</div> -->

@@ -1,12 +1,25 @@
-<!-- <div class="card flex justify-content-center">
-  <h2>Seleccione el archivo de AFIP </h2>
-  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUploadAFIP($event)"></p-fileUpload>
+<div class="upload-container">
+  <div class="upload-box">
+    <h2>Archivo CSV de AFIP</h2>
+    <p-fileUpload #fileUploadCSV mode="basic" chooseLabel="Seleccionar CSV" name="csvFile" accept=".csv" (onSelect)="onSelectFile($event, 'csv')" [auto]="true"></p-fileUpload>
+    <p *ngIf="csvFile">Archivo seleccionado: {{csvFile.name}}</p>
+  </div>
+  <div class="upload-box">
+    <h2>Archivo TXT del sistema</h2>
+    <p-fileUpload #fileUploadTXT mode="basic" chooseLabel="Seleccionar TXT" name="txtFile" accept=".txt" (onSelect)="onSelectFile($event, 'txt')" [auto]="true"></p-fileUpload>
+    <p *ngIf="txtFile">Archivo seleccionado: {{txtFile.name}}</p>
+  </div>
 </div>
-<div class="card flex justify-content-center">
-  <h2>Seleccione el archivo de su sistema</h2>
-  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)"></p-fileUpload>
-</div> -->
-<div class="card flex justify-content-center">
-  <h2>Seleccione el archivo del sistema</h2>
-  <p-fileUpload mode="basic" chooseLabel="Choose" name="myfile[]" accept=".csv,.txt" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUploadAFIP($event)" [multiple]="true"></p-fileUpload>
-</div>
+
+<p-dialog header="Error" [(visible)]="showErrorDialog" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" (onHide)="closeErrorDialog()">
+  <div class="error-icon">
+    <i class="pi pi-times-circle"></i>
+  </div>
+  <p>Error al procesar los archivos. Verifique si está cargando los archivos correctos.</p>
+  <p>Mensaje de error: {{errorMessage}}</p>
+  <ng-template pTemplate="footer">
+    <button pButton type="button" label="Cerrar" (click)="closeErrorDialog()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-progressSpinner *ngIf="loading"></p-progressSpinner>
