@@ -59,14 +59,9 @@ export class DifferenceTableComponent implements OnInit {
     return typeof value === 'object' && value !== null && 'options' in value && 'selectedOption' in value;
   }
 
-  onSelectChange(item: DifferenceTableItem, field: keyof DifferenceTableItem, event: Event) {
-    const select = event.target as HTMLSelectElement;
-    const selectedValue = select.value;
-
-    console.log(selectedValue)
-    
+  onSelectChange(item: DifferenceTableItem, field: keyof DifferenceTableItem, event: any) {
     if (this.isObject(item[field])) {
-      (item[field] as DifferenceTableItemInfo<any>).selectedOption = selectedValue;
+      (item[field] as DifferenceTableItemInfo<any>).selectedOption = event.value;
     }
   }
 

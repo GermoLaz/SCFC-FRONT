@@ -10,6 +10,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,7 +30,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     CheckboxModule,
     PanelModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ]
 
 })

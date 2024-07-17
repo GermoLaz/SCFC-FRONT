@@ -1,5 +1,9 @@
 <div class="main-container">
-  <p-panel header="Carga de archivos" [toggleable]="true" [collapsed]="showTable">
+  <p-panel [toggleable]="true" [collapsed]="showTable">
+    <ng-template pTemplate="header">
+      <span>Carga de archivos</span>
+      <button pButton type="button" label="Limpiar Archivos" (click)="clearFiles()" class="p-button-outlined p-button-secondary"></button>
+    </ng-template>
     <app-files-upload (processingComplete)="onProcessingComplete($event)"></app-files-upload>
   </p-panel>
   <div class="table-container" *ngIf="showTable">

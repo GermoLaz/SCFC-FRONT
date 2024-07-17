@@ -4,7 +4,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // el logueo no es necesario, se deja comentado por si necesita en el futuro
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/main-page', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'main-page', component: MainPageComponent },
 ];

@@ -9,3 +9,24 @@
   margin-top: 2rem;
   overflow-x: auto;
 }
+
+:host ::ng-deep .p-panel .p-panel-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+:host ::ng-deep .p-panel .p-panel-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+:host ::ng-deep .p-panel .p-panel-header-icon {
+  margin-left: 0.5rem;
+}
+
+:host ::ng-deep .p-panel .p-panel-header button {
+  margin-left: 1rem;
+}
