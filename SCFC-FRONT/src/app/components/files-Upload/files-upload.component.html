@@ -22,4 +22,6 @@
   </ng-template>
 </p-dialog>
 
-<p-progressSpinner *ngIf="loading"></p-progressSpinner>
+<div class="spinner-container" *ngIf="loading">
+  <p-progressSpinner></p-progressSpinner>
+</div>

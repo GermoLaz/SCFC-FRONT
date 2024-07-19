@@ -51,10 +51,6 @@ export class DifferenceTableComponent implements OnInit {
 
   constructor(private differenceService: DifferenceService) { }
 
-  // isObject(value: any): boolean {
-  //   return typeof value === 'object' && value !== null && 'options' in value && 'selectedOption' in value;
-  // }
-
   isObject(value: any): value is DifferenceTableItemInfo<any> {
     return typeof value === 'object' && value !== null && 'options' in value && 'selectedOption' in value;
   }
@@ -122,7 +118,6 @@ export class DifferenceTableComponent implements OnInit {
 
 
       });
-      console.log(this.tableArray)
     });
   }
 
