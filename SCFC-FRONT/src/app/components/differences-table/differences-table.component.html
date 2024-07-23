@@ -9,7 +9,7 @@
       <th pFrozenColumn>Pto Venta</th>
       <th pFrozenColumn>Num Comp</th>
       <th>Tipo Comp</th>
-      <th>Cod Doc Vendedor</th>
+      <!-- <th>Cod Doc Vendedor</th> -->
       <th>Doc Vendedor</th>
       <th>Nombre Vendedor</th>
       <th>Importe Total</th>
@@ -20,17 +20,17 @@
       <th>Perc IIBB</th>
       <th>Perc Muni</th>
       <th>Total Imp Internos</th>
-      <th>Cod Moneda</th>
-      <th>Tipo Cambio</th>
+      <!-- <th>Cod Moneda</th> -->
+      <!-- <th>Tipo Cambio</th> -->
       <th>Cant Alicuotas</th>
-      <th>Cod Operacion</th>
+      <!-- <th>Cod Operacion</th> -->
       <th>Credito Fisc Computable</th>
       <th>Otros Tributos</th>
       <!-- <th>Source File</th> -->
       <!-- <th>CUIT Emisor</th>
       <th>Denom Emisor</th>
       <th>IVA Comision</th> -->
-      <th>Despacho Import</th>
+      <!-- <th>Despacho Import</th> -->
       <th>Error Description</th>
       <th pFrozenColumn alignFrozen="right" [style]="{'width': '100px', 'text-align': 'center'}">Marcar</th>
     </tr>
@@ -73,7 +73,7 @@
         </p-dropdown>
         <ng-template #simpleTipoComp>{{item.tipoComp}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <p-dropdown *ngIf="isObject(item.codDocVendedor); else simpleCodDocVendedor"
                     [options]="item.codDocVendedor.options"
                     [(ngModel)]="item.codDocVendedor.selectedOption"
@@ -81,7 +81,7 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleCodDocVendedor>{{item.codDocVendedor}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <p-dropdown *ngIf="isObject(item.docVendedor); else simpleDocVendedor"
                     [options]="item.docVendedor.options"
@@ -172,7 +172,7 @@
         </p-dropdown>
         <ng-template #simpleTotalImpInternos>{{item.totalImpInternos}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <p-dropdown *ngIf="isObject(item.codMoneda); else simpleCodMoneda"
                     [options]="item.codMoneda.options"
                     [(ngModel)]="item.codMoneda.selectedOption"
@@ -180,8 +180,8 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleCodMoneda>{{item.codMoneda}}</ng-template>
-      </td>
-      <td>
+      </td> -->
+      <!-- <td>
         <p-dropdown *ngIf="isObject(item.tipoCambio); else simpleTipoCambio"
                     [options]="item.tipoCambio.options"
                     [(ngModel)]="item.tipoCambio.selectedOption"
@@ -189,7 +189,7 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleTipoCambio>{{item.tipoCambio}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <p-dropdown *ngIf="isObject(item.cantAlicuotas); else simpleCantAlicuotas"
                     [options]="item.cantAlicuotas.options"
@@ -199,7 +199,7 @@
         </p-dropdown>
         <ng-template #simpleCantAlicuotas>{{item.cantAlicuotas}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <p-dropdown *ngIf="isObject(item.codOperacion); else simpleCodOperacion"
                     [options]="item.codOperacion.options"
                     [(ngModel)]="item.codOperacion.selectedOption"
@@ -207,7 +207,7 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleCodOperacion>{{item.codOperacion}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <p-dropdown *ngIf="isObject(item.creditoFiscComputable); else simpleCreditoFiscComputable"
                     [options]="item.creditoFiscComputable.options"
@@ -226,7 +226,7 @@
         </p-dropdown>
         <ng-template #simpleOtrosTributos>{{item.otrosTributos}}</ng-template>
       </td>
-      <td>
+      <!-- <td>
         <p-dropdown *ngIf="isObject(item.despachoImport); else simpleDespachoImport"
                     [options]="item.despachoImport.options"
                     [(ngModel)]="item.despachoImport.selectedOption"
@@ -234,7 +234,7 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleDespachoImport>{{item.despachoImport}}</ng-template>
-      </td>
+      </td> -->
       <td>
         <p-dropdown *ngIf="isObject(item.errorDescription); else simpleErrorDescription"
                     [options]="item.errorDescription.options"
