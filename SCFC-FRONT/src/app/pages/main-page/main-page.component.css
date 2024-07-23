@@ -1,17 +1,32 @@
 .main-container {
-  max-width: 95%;
-  max-height: 95%;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden; 
 }
 
 .table-container {
-  margin-top: 2rem;
-  overflow-x: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  overflow: hidden; 
+}
+
+:host ::ng-deep .p-panel.p-panel-collapsed + .table-container {
+  height: calc(100vh - 60px);
+}
+
+:host ::ng-deep .p-panel {
+  margin-bottom: 0.5rem; 
 }
 
 :host ::ng-deep .p-panel .p-panel-header {
-  padding: 1rem;
+  padding: 0.75rem; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,5 +43,48 @@
 }
 
 :host ::ng-deep .p-panel .p-panel-header button {
-  margin-left: 1rem;
+  margin-left: 0.5rem; 
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0; 
+  margin-top: auto; 
+}
+
+.agregar-elementos-btn {
+  border-color: #007bff;
+  color: #007bff;
+  white-space: nowrap; 
+}
+
+.agregar-elementos-btn:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+app-differences-table {
+  flex: 1;
+  min-height: 100px; 
+  overflow: auto; 
+}
+
+@media screen and (max-height: 600px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+
+  :host ::ng-deep .p-panel .p-panel-header {
+    padding: 0.5rem;
+  }
+
+  .button-container {
+    padding: 0.25rem 0;
+  }
+
+  /* .agregar-elementos-btn {
+    font-size: 0.9rem; 
+    padding: 0.25rem 0.5rem; 
+  } */
 }

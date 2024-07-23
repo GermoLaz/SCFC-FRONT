@@ -1,5 +1,8 @@
-<p-table [value]="tableArray" [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}" [frozenColumns]="['column1', 'column2', 'column3']" [scrollable]="true" [scrollHeight]="'400px'" [style]="{'width':'100%'}">
-  <ng-template pTemplate="header">
+<p-table [value]="tableArray" 
+         [scrollable]="true" 
+         scrollHeight="calc(100vh - 200px)" 
+         [frozenColumns]="['fecha', 'ptoVenta', 'numComp']"
+         styleClass="p-datatable-sm">  <ng-template pTemplate="header">
     <tr>
       <!-- <th>ID</th> -->
       <th pFrozenColumn>Fecha</th>

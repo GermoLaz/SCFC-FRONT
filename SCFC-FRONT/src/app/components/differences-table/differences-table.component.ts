@@ -121,4 +121,44 @@ export class DifferenceTableComponent implements OnInit {
     });
   }
 
+  saveItems() {
+    const storedInvoices = localStorage.getItem('allInvoices');
+    let allInvoices: Invoice[] = storedInvoices ? JSON.parse(storedInvoices) : [];
+    
+    const convertedTableArray: Invoice[] = this.tableArray.map(item => {
+        let convertedItem: Partial<Invoice> = {};
+        (Object.keys(item) as Array<keyof DifferenceTableItem>).forEach(key => {
+            if (this.isObject(item[key])) {
+                (convertedItem as any)[key] = (item[key] as DifferenceTableItemInfo<any>).selectedOption;
+            } else {
+                (convertedItem as any)[key] = item[key];
+            }
+        });
+        return convertedItem as Invoice;
+    });
+    
+    let updatedCount = 0;
+    let addedCount = 0;
+
+    convertedTableArray.forEach(newItem => {
+        const existingIndex = allInvoices.findIndex(existingItem => 
+            existingItem.fecha === newItem.fecha &&
+            existingItem.ptoVenta === newItem.ptoVenta &&
+            existingItem.numComp === newItem.numComp &&
+            existingItem.docVendedor === newItem.docVendedor
+        );
+
+        if (existingIndex !== -1) {
+            allInvoices[existingIndex] = { ...allInvoices[existingIndex], ...newItem };
+            updatedCount++;
+        } else {
+            allInvoices.push(newItem);
+            addedCount++;
+        }
+    });
+    
+    localStorage.setItem('allInvoices', JSON.stringify(allInvoices));
+
+    console.log(`Se actualizaron ${updatedCount} elementos y se agregaron ${addedCount} nuevos elementos.`);
+  }
 }

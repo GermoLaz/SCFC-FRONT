@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FilesUploadComponent } from '../../components/files-Upload/files-upload.component';
+import { DifferenceTableComponent } from '../../components/differences-table/differences-table.component';
 
 @Component({
   selector: 'app-main-page',
@@ -8,6 +9,7 @@ import { FilesUploadComponent } from '../../components/files-Upload/files-upload
 })
 export class MainPageComponent {
   @ViewChild(FilesUploadComponent) filesUploadComponent!: FilesUploadComponent;
+  @ViewChild(DifferenceTableComponent) differenceTableComponent!: DifferenceTableComponent;
   
   showTable = false;
 
@@ -15,10 +17,31 @@ export class MainPageComponent {
     this.showTable = event;
   }
 
+
+  onPanelCollapse(event: any) {
+    this.adjustTableContainer();
+  }
+
+  onPanelExpand(event: any) {
+    this.adjustTableContainer();
+  }
+
+  private adjustTableContainer() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+  }
+
   clearFiles() {
     if (this.filesUploadComponent) {
       this.filesUploadComponent.resetFiles();
     }
     this.showTable = false;
+  }
+
+  saveItems() {
+    if (this.filesUploadComponent) {
+      this.differenceTableComponent.saveItems()
+    }
   }
 }

@@ -1,11 +1,46 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
 :host ::ng-deep .p-datatable {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+:host ::ng-deep .p-datatable-scrollable-body {
+  overflow-y: auto !important;
+  overflow-x: auto !important;
 }
 
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  background-color: #f8f9fa;
-  color: #495057;
-  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+:host ::ng-deep .p-datatable-scrollable .p-frozen-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+:host ::ng-deep .p-datatable-scrollable .p-frozen-column {
+  background-color: #fff; 
+}
+
+:host ::ng-deep .p-datatable-scrollable .p-frozen-column:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #e9ecef;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th.p-frozen-column {
+  z-index: 2;
 }
 
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) {
@@ -24,25 +59,6 @@
 :host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
   border-color: #2196F3;
   background: #2196F3;
-}
-
-:host ::ng-deep .p-datatable-scrollable-body {
-  overflow-x: auto !important;
-}
-
-:host ::ng-deep .p-datatable-scrollable .p-frozen-column {
-  position: sticky;
-  background-color: #fff;
-}
-
-:host ::ng-deep .p-datatable-scrollable .p-frozen-column:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: #e9ecef;
 }
 
 :host ::ng-deep .p-checkbox {
@@ -81,20 +97,17 @@
   background-color: #e9ecef;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 4rem); 
-  max-width: 95%;
-  margin: 0 auto;
-  padding: 2rem;
-}
+@media screen and (max-height: 600px) {
+  :host {
+    min-height: 150px;
+  }
 
-.table-container {
-  flex-grow: 1;
-  overflow: auto;
-}
+  :host ::ng-deep .p-datatable-scrollable-body {
+    min-height: 80px;
+  }
 
-:host ::ng-deep .p-panel.p-panel-collapsed + .table-container {
-  height: calc(100% - 60px);
+  :host ::ng-deep .p-datatable .p-datatable-thead > tr > th,
+  :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.25rem;
+  }
 }
