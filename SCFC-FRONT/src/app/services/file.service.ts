@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
-import { InvoicesResponse } from '../../models/InvoicesResponse.model';
+import { InvoicesResponse } from '../models/InvoicesResponse.model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FilesUploadService {
+export class FileService {
   /* swal2 */
   private errorTitle = 'Error';
   private errorSwalIcon: SweetAlertIcon = 'error';
 
-  private url = 'http://localhost:8080/invoice/compare';
+  private apiUrl = 'http://localhost:8080/invoice/';
+
+  constructor(private http: HttpClient) {}
 
   getDifferences(localFile: File, afipFile: File): Promise<InvoicesResponse> {
     return new Promise(async (resolve, reject) => {
@@ -18,7 +22,7 @@ export class FilesUploadService {
       formData.append('file', localFile);
       formData.append('file2', afipFile);
       try {
-        const res = await fetch(this.url, {
+        const res = await fetch(`${this.apiUrl}/compare`, {
           method: 'POST',
           body: formData      
         });
@@ -32,6 +36,12 @@ export class FilesUploadService {
         console.error(error);
         reject(error);
       }
+    });
+  }
+
+  generateFile(invoices: any[]): Observable<Blob> {
+    return this.http.post(`${this.apiUrl}generateFile`, invoices, {
+      responseType: 'blob'
     });
   }
 }

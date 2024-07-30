@@ -49,7 +49,8 @@
 .button-container {
   display: flex;
   justify-content: flex-end;
-  padding: 0.5rem 0; 
+  padding: 0.5rem 0;
+  gap: 10px; 
   margin-top: auto; 
 }
 
@@ -61,6 +62,17 @@
 
 .agregar-elementos-btn:hover {
   background-color: #007bff;
+  color: #ffffff;
+}
+
+.exportar-archivo-btn {
+  border-color: #00ff40;
+  color: #00ff40;
+  white-space: nowrap; 
+}
+
+.exportar-archivo-btn:hover {
+  background-color: #00ff37;
   color: #ffffff;
 }
 

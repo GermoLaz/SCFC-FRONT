@@ -23,7 +23,7 @@
       <!-- <th>Cod Moneda</th> -->
       <!-- <th>Tipo Cambio</th> -->
       <th>Cant Alicuotas</th>
-      <!-- <th>Cod Operacion</th> -->
+      <th>Cod Operacion</th>
       <th>Credito Fisc Computable</th>
       <th>Otros Tributos</th>
       <!-- <th>Source File</th> -->
@@ -199,7 +199,7 @@
         </p-dropdown>
         <ng-template #simpleCantAlicuotas>{{item.cantAlicuotas}}</ng-template>
       </td>
-      <!-- <td>
+      <td [style]="{'width': '100px', 'text-align': 'left'}">
         <p-dropdown *ngIf="isObject(item.codOperacion); else simpleCodOperacion"
                     [options]="item.codOperacion.options"
                     [(ngModel)]="item.codOperacion.selectedOption"
@@ -207,7 +207,7 @@
                     [style]="{'width':'100%'}">
         </p-dropdown>
         <ng-template #simpleCodOperacion>{{item.codOperacion}}</ng-template>
-      </td> -->
+      </td>
       <td>
         <p-dropdown *ngIf="isObject(item.creditoFiscComputable); else simpleCreditoFiscComputable"
                     [options]="item.creditoFiscComputable.options"

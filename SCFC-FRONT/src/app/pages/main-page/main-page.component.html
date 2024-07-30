@@ -1,19 +1,21 @@
 <div class="main-container">
-  <p-panel [toggleable]="true" [collapsed]="showTable" (onCollapse)="onPanelCollapse($event)" (onExpand)="onPanelExpand($event)">
+  <p-panel [toggleable]="true" [collapsed]="showTable" (onCollapse)="onPanelCollapse($event)"
+    (onExpand)="onPanelExpand($event)">
     <ng-template pTemplate="header">
       <span>Carga de archivos</span>
-      <button pButton type="button" label="Limpiar Archivos" (click)="clearFiles()" class="p-button-outlined p-button-secondary"></button>
+      <button pButton type="button" label="Limpiar Archivos" (click)="clearFiles()"
+        class="p-button-outlined p-button-secondary"></button>
     </ng-template>
     <app-files-upload (processingComplete)="onProcessingComplete($event)"></app-files-upload>
   </p-panel>
   <div class="table-container" *ngIf="showTable">
     <app-differences-table></app-differences-table>
     <div class="button-container">
-      <button pButton 
-              type="button" 
-              label="Agregar elementos" 
-              (click)="saveItems()" 
-              class="p-button-outlined p-button-info agregar-elementos-btn">
+      <button pButton type="button" label="Agregar elementos" (click)="saveItems()"
+        class="p-button-outlined p-button-info agregar-elementos-btn">
+      </button>
+      <button pButton type="button" label="Exportar archivo" (click)="exportFile()"
+        class="p-button-outlined p-button-success exportar-archivo-btn">
       </button>
     </div>
   </div>

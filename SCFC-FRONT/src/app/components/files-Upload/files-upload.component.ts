@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { FilesUploadService } from './files-upload.service';
+import { FileService } from '../../services/file.service';
 import { DifferenceService } from './../../services/difference.service';
 import { InvoicesResponse } from '../../models/InvoicesResponse.model';
 import { FileUpload } from 'primeng/fileupload';
@@ -24,7 +24,7 @@ export class FilesUploadComponent {
 
   constructor(
     private messageService: MessageService,
-    private filesUploadService: FilesUploadService,
+    private fileService: FileService,
     private differenceService: DifferenceService
   ) { }
 
@@ -43,7 +43,7 @@ export class FilesUploadComponent {
 
   processFiles() {
     this.loading = true;
-    this.filesUploadService.getDifferences(this.csvFile, this.txtFile).then(
+    this.fileService.getDifferences(this.csvFile, this.txtFile).then(
       (invoiceResponse: InvoicesResponse) => {
         console.log(invoiceResponse);
         localStorage.setItem('allInvoices', JSON.stringify(invoiceResponse.allInvoices));
