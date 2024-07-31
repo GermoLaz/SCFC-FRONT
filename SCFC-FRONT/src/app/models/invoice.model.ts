@@ -30,9 +30,9 @@ export interface Invoice extends IWsReturnBasic{
     creditoFiscComputable: number,
     otrosTributos: number,
     sourceFile: string,
-    errorDescription: string,
     cuitEmisor: string,
     denomEmisor: string,
-    ivacomision: number
-
+    ivacomision: number,
+    errorDescription: string,
+    hasError: boolean
 }

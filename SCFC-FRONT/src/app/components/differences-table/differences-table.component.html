@@ -36,7 +36,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
-    <tr [ngClass]="{'selected-row': item.selected}">
+    <tr [ngClass]="{'selected-row': item.selected, 'error-row': item.hasError}">
       <td pFrozenColumn>
         <p-dropdown *ngIf="isObject(item.fecha); else simpleFecha"
                     [options]="item.fecha.options"
@@ -245,7 +245,7 @@
         <ng-template #simpleErrorDescription>{{item.errorDescription}}</ng-template>
       </td>
       <td pFrozenColumn alignFrozen="right" [style]="{'width': '100px', 'text-align': 'center'}">
-        <p-checkbox [(ngModel)]="item.selected" [binary]="true"></p-checkbox>
+        <p-checkbox [(ngModel)]="item.selected" [binary]="true" [disabled]="item.hasError"></p-checkbox>
       </td>
     </tr>
   </ng-template>

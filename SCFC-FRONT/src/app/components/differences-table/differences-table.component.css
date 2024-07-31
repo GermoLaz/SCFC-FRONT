@@ -56,6 +56,11 @@
   background-color: #e6fff2 !important;
 }
 
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.error-row,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.error-row > td {
+  background-color: #ffcccb !important;
+}
+
 :host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
   border-color: #2196F3;
   background: #2196F3;
